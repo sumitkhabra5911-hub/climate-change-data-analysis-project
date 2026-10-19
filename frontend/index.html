@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TerraPulse — Global Climate Intelligence & Prediction Platform</title>
+  <meta name="description" content="End-to-End Climate Change Data Analysis, 8-Chart Exploratory Analytics, Machine Learning Risk Classification, and 2050 Warming Projections.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons & Chart.js -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <a href="#" class="brand-wrapper">
+        <div class="brand-logo">
+          <i data-lucide="globe"></i>
+        </div>
+        <div class="brand-text">
+          <h1>TerraPulse</h1>
+          <p>Climate Intelligence & Prediction</p>
+        </div>
+      </a>
+
+            <div class="header-badge-group">
+        <div class="status-badge" id="api-status-badge">
+          <span class="pulse-dot" style="background:#10b981;"></span>
+          <span id="api-status-text">Production API: Online</span>
+        </div>
+        <div class="status-badge">
+          <span class="pulse-dot"></span>
+          <span>Model Accuracy: 99.8%</span>
+        </div>
+
+        <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Dark/Light Mode">
+          <i data-lucide="sun" id="theme-icon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs Bar -->
+  <nav class="nav-tabs-wrapper">
+    <div class="nav-tabs-container">
+      <button class="nav-tab-btn active" data-target="overview">
+        <i data-lucide="layout-dashboard"></i> Overview
+      </button>
+      <button class="nav-tab-btn" data-target="eda">
+        <i data-lucide="bar-chart-3"></i> 8-Chart EDA Deep Dive
+      </button>
+      <button class="nav-tab-btn" data-target="country">
+        <i data-lucide="map-pin"></i> Country Intelligence
+      </button>
+      <button class="nav-tab-btn" data-target="simulator">
+        <i data-lucide="cpu"></i> AI Risk Predictor
+      </button>
+      <button class="nav-tab-btn" data-target="forecast">
+        <i data-lucide="trending-up"></i> 2050 Forecast
+      </button>
+      <button class="nav-tab-btn" data-target="table">
+        <i data-lucide="database"></i> Data Explorer
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Application Body -->
+  <main class="main-content">
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+      <div class="hero-content">
+        <div class="hero-pill">
+          <i data-lucide="sparkles"></i> Machine Learning Benchmark & Climate Science
+        </div>
+        <h2 class="hero-title">Global Climate Trends & Machine Learning Risk Analytics</h2>
+        <p class="hero-description">
+          Synthesizing historical climate observations across 30 countries from 1950 to 2023. Powered by country-specific median imputation, ensemble classification models (Logistic Regression, Random Forest, Gradient Boosting), and long-term 2050 linear regression forecasting.
+        </p>
+      </div>
+    </section>
+
+    <!-- Global KPI Cards -->
+    <section class="kpi-grid">
+      <div class="kpi-card coral">
+        <div class="kpi-top">
+          <span class="kpi-title">2023 Global Anomaly</span>
+          <div class="kpi-icon coral"><i data-lucide="thermometer"></i></div>
+        </div>
+        <div class="kpi-value">+2.18°C</div>
+        <div class="kpi-subtext">
+          <span class="badge-trend up">▲ +218%</span> vs 1950–1980 baseline
+        </div>
+      </div>
+
+      <div class="kpi-card amber">
+        <div class="kpi-top">
+          <span class="kpi-title">Cumulative Global CO2</span>
+          <div class="kpi-icon amber"><i data-lucide="cloud-rain"></i></div>
+        </div>
+        <div class="kpi-value">1.25 TMT</div>
+        <div class="kpi-subtext">
+          <span class="badge-trend up">▲ Accelerating</span> total emissions since 1950
+        </div>
+      </div>
+
+      <div class="kpi-card cyan">
+        <div class="kpi-top">
+          <span class="kpi-title">Mean Sea Level Rise</span>
+          <div class="kpi-icon cyan"><i data-lucide="waves"></i></div>
+        </div>
+        <div class="kpi-value">+218.4 mm</div>
+        <div class="kpi-subtext">
+          <span class="badge-trend up">▲ Accelerating</span> quadratic rise rate
+        </div>
+      </div>
+
+      <div class="kpi-card emerald">
+        <div class="kpi-top">
+          <span class="kpi-title">ML Model Test Accuracy</span>
+          <div class="kpi-icon emerald"><i data-lucide="shield-check"></i></div>
+        </div>
+        <div class="kpi-value">95.95%</div>
+        <div class="kpi-subtext">
+          <span class="badge-trend down">ROC-AUC 0.991</span> 5-Fold Stratified CV
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 1: OVERVIEW -->
+    <section class="tab-section active" id="section-overview">
+      <div class="section-header">
+        <h3 class="section-title">Global Climate Indicator Highlights</h3>
+        <p class="section-subtitle">High-level trajectories of atmospheric temperature, sea level expansion, and major emitter contributions.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div class="chart-title-group">
+            <h3><i data-lucide="flame" style="color: var(--coral);"></i> Global Temperature Anomaly Trajectory (1950–2023)</h3>
+            <p>Annual global mean deviation relative to the 1950–1980 pre-industrial benchmark.</p>
+          </div>
+        </div>
+        <div class="chart-canvas-container">
+          <canvas id="chart-overview-anomaly"></canvas>
+        </div>
+      </div>
+
+      <div class="grid-2col">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title-group">
+              <h3><i data-lucide="waves" style="color: var(--cyan);"></i> Global Sea Level Rise (mm)</h3>
+              <p>Cumulative sea level expansion accelerating post-1990.</p>
+            </div>
+          </div>
+          <div class="chart-canvas-container">
+            <canvas id="chart-overview-slr"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title-group">
+              <h3><i data-lucide="factory" style="color: var(--amber);"></i> Top Historical Emitters (Gigatons)</h3>
+              <p>Top cumulative carbon emitting nations over the 74-year timeline.</p>
+            </div>
+          </div>
+          <div class="chart-canvas-container">
+            <canvas id="chart-overview-emitters"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: 8-CHART EDA DEEP DIVE -->
+    <section class="tab-section" id="section-eda">
+      <div class="section-header">
+        <h3 class="section-title">8-Chart Exploratory Data Analysis (EDA)</h3>
+        <p class="section-subtitle">Detailed visual analytics exploring non-linear warming trends, decadal distributions, correlations, and regional amplification.</p>
+      </div>
+
+      <div class="grid-2col">
+        <!-- Chart 1 -->
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title-group">
+              <h3>1. Global Temperature Anomaly Trend</h3>
+              <p>Bar visualization with 5-year moving average smoothing.</p>
+            </div>
+          </div>
+          <div class="chart-canvas-container">
+            <canvas id="chart-eda-1"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart 2 -->
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title-group">
+              <h3>2. Top 10 Cumulative CO2 Emitters</h3>
+              <p>Total gigatons emitted by top economies since 1950.</p>
+            </div>
+          </div>
+          <div class="chart-canvas-container">
+            <canvas id="chart-eda-2"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart 3 -->
+        <div class="chart-card" style="grid-column: 1 / -1;">
+          <div class="chart-card-header">
+            <div class="chart-title-group">
+              <h3>3. Correlation Matrix of Global Climate Indicators</h3>
+              <p>Pairwise Pearson correlation coefficients across physical & human variables.</p>
+            </div>
+          </div>
+          <div class="corr-grid-wrapper" id="corr-table-container">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Chart 4 -->
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title-group">
+              <h3>4. Cumulative Sea Level Rise Acceleration</h3>
+              <p>Global sea level increase reaching ~218mm above 1950 baseline.</p>
+            </div>
+          </div>
+          <div class="chart-canvas-container">
+            <canvas id="chart-eda-4"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart 5 -->
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title-group">
+              <h3>5. Decadal Shift in Temperature Distributions</h3>
+              <p>Progressive distribution migration from the 1950s baseline to 2020s extremes.</p>
+            </div>
+          </div>
+          <div class="chart-canvas-container">
+            <canvas id="chart-eda-5"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart 6 -->
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title-group">
+              <h3>6. CO2 per Capita vs Temperature Anomaly</h3>
+              <p>Scatter distribution showing the positive correlation between per-capita emissions and warming.</p>
+            </div>
+          </div>
+          <div class="chart-canvas-container">
+            <canvas id="chart-eda-6"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart 7 -->
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title-group">
+              <h3>7. Precipitation Trends & Interannual Volatility</h3>
+              <p>Global annual precipitation fluctuations and moving average.</p>
+            </div>
+          </div>
+          <div class="chart-canvas-container">
+            <canvas id="chart-eda-7"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart 8 -->
+        <div class="chart-card" style="grid-column: 1 / -1;">
+          <div class="chart-card-header">
+            <div class="chart-title-group">
+              <h3>8. Regional Warming Divergence: High-Latitude Amplification vs Tropics</h3>
+              <p>Comparing warming trajectories across Canada, Norway, USA, China, Brazil, India, and Australia.</p>
+            </div>
+          </div>
+          <div class="chart-canvas-container">
+            <canvas id="chart-eda-8"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: COUNTRY INTELLIGENCE -->
+    <section class="tab-section" id="section-country">
+      <div class="section-header">
+        <h3 class="section-title">Country Intelligence Explorer</h3>
+        <p class="section-subtitle">Deep dive into historical climate records for any of the 30 countries across the globe.</p>
+      </div>
+
+      <div class="country-filter-bar">
+        <label for="country-select" style="font-weight: 600; font-size: 0.9rem;">Select Country:</label>
+        <select id="country-select" class="select-control"></select>
+      </div>
+
+      <div class="country-meta-card">
+        <div class="meta-item">
+          <div class="meta-label">Nation</div>
+          <div class="meta-value" id="meta-country-name">United States</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">1950–80 Baseline</div>
+          <div class="meta-value" id="meta-baseline">11.5°C</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">1950 Initial Temp</div>
+          <div class="meta-value" id="meta-temp-1950">11.5°C</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">2023 Current Temp</div>
+          <div class="meta-value" id="meta-temp-2023">13.6°C</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Current Anomaly</div>
+          <div class="meta-value" id="meta-anomaly" style="color: var(--coral);">+2.1°C</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Cumulative CO2</div>
+          <div class="meta-value" id="meta-co2">240 GT</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">2023 Population</div>
+          <div class="meta-value" id="meta-pop">335M</div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div class="chart-title-group">
+            <h3>Country Climate Trajectory (1950–2023)</h3>
+            <p>Annual mean temperature and anomaly relative to country historical median baseline.</p>
+          </div>
+        </div>
+        <div class="chart-canvas-container">
+          <canvas id="chart-country-history"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: AI CLIMATE RISK SIMULATOR -->
+    <section class="tab-section" id="section-simulator">
+      <div class="section-header">
+        <h3 class="section-title">AI Climate Risk Simulator & Real-Time Inference</h3>
+        <p class="section-subtitle">Adjust environmental levers and evaluate climate risk using the trained classification pipeline (95.9% Test Accuracy).</p>
+      </div>
+
+      <div class="simulator-container">
+        <!-- Interactive Controls -->
+        <div class="form-panel">
+          <h4 style="font-family: var(--font-heading); margin-bottom: 1.25rem;">Environmental Scenario Parameters</h4>
+
+          <div class="form-group" style="margin-bottom: 1.2rem;">
+            <div class="form-label-row">
+              <label class="form-label" for="sim-model-select">ML Classifier Model</label>
+              <span class="form-value-badge" id="sim-engine-badge" style="color: var(--emerald);">API Connected</span>
+            </div>
+            <select id="sim-model-select" class="select-control" style="width: 100%; margin-top: 0.35rem; cursor: pointer;">
+              <option value="Logistic Regression">Logistic Regression (Linear Benchmark • 95.9%)</option>
+              <option value="Random Forest">Random Forest (Ensemble Trees • 95.5%)</option>
+              <option value="Gradient Boosting">Gradient Boosting (Boosted Trees • 96.0%)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <div class="form-label-row">
+              <label class="form-label" for="sim-year">Observation Year</label>
+              <span class="form-value-badge" id="sim-year-val">2024</span>
+            </div>
+            <input type="range" class="range-slider" id="sim-year" min="1950" max="2050" value="2024">
+          </div>
+
+          <div class="form-group">
+            <div class="form-label-row">
+              <label class="form-label" for="sim-co2">Annual CO2 Emissions (Metric Tons, MT)</label>
+              <span class="form-value-badge" id="sim-co2-val">2500</span>
+            </div>
+            <input type="range" class="range-slider" id="sim-co2" min="10" max="15000" step="50" value="2500">
+          </div>
+
+          <div class="form-group">
+            <div class="form-label-row">
+              <label class="form-label" for="sim-pop">National Population</label>
+              <span class="form-value-badge" id="sim-pop-val">120000000</span>
+            </div>
+            <input type="range" class="range-slider" id="sim-pop" min="2000000" max="1450000000" step="1000000" value="120000000">
+          </div>
+
+          <div class="form-group">
+            <div class="form-label-row">
+              <label class="form-label" for="sim-slr">Cumulative Sea Level Rise (mm)</label>
+              <span class="form-value-badge" id="sim-slr-val">220</span>
+            </div>
+            <input type="range" class="range-slider" id="sim-slr" min="0" max="450" step="2" value="220">
+          </div>
+
+          <div class="form-group">
+            <div class="form-label-row">
+              <label class="form-label" for="sim-precip">Annual Precipitation (mm)</label>
+              <span class="form-value-badge" id="sim-precip-val">850</span>
+            </div>
+            <input type="range" class="range-slider" id="sim-precip" min="50" max="3000" step="10" value="850">
+          </div>
+
+          <div class="form-group">
+            <div class="form-label-row">
+              <label class="form-label" for="sim-humidity">Average Relative Humidity (%)</label>
+              <span class="form-value-badge" id="sim-humidity-val">68</span>
+            </div>
+            <input type="range" class="range-slider" id="sim-humidity" min="20" max="95" step="1" value="68">
+          </div>
+
+          <div class="form-group">
+            <div class="form-label-row">
+              <label class="form-label" for="sim-base-temp">Country Baseline Temperature (°C)</label>
+              <span class="form-value-badge" id="sim-base-temp-val">12.5</span>
+            </div>
+            <input type="range" class="range-slider" id="sim-base-temp" min="-10" max="30" step="0.5" value="12.5">
+          </div>
+
+          <div class="form-group">
+            <div class="form-label-row">
+              <label class="form-label" for="sim-temp-change">YoY Temperature Acceleration (°C)</label>
+              <span class="form-value-badge" id="sim-temp-change-val">0.45</span>
+            </div>
+            <input type="range" class="range-slider" id="sim-temp-change" min="-1.5" max="2.5" step="0.05" value="0.45">
+          </div>
+
+          <button class="btn-primary" id="btn-run-simulation" style="width: 100%; justify-content: center; margin-top: 0.5rem;">
+            <i data-lucide="play"></i> Recalculate Risk Assessment
+          </button>
+        </div>
+
+        <!-- Real-Time Output & Feature Attribution -->
+        <div class="result-panel">
+          <div class="verdict-box high-risk" id="sim-verdict-box">
+            <div class="verdict-tag" id="sim-verdict-tag">HIGH CLIMATE RISK ACCELERATION</div>
+            <div class="verdict-prob" id="sim-verdict-prob">87.4%</div>
+            <p class="verdict-desc" id="sim-verdict-desc">
+              Model predicts extreme temperature anomaly exceeding the historical 75th percentile threshold.
+            </p>
+          </div>
+
+          <div>
+            <h5 style="font-size: 0.88rem; font-weight: 700; margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.4rem;">
+              <i data-lucide="sliders" style="width: 16px; height: 16px; color: var(--emerald);"></i> Top Risk Drivers (Standardized Log-Odds Effect)
+            </h5>
+            <div class="feature-contrib-list" id="feature-contrib-container">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <div>
+            <h5 style="font-size: 0.88rem; font-weight: 700; margin-bottom: 0.75rem;">Model Benchmark Summary</h5>
+            <div class="model-metrics-grid">
+              <div class="metric-pill-card">
+                <div class="metric-pill-title">Logistic Reg.</div>
+                <div class="metric-pill-val" style="color: var(--emerald);">95.9%</div>
+              </div>
+              <div class="metric-pill-card">
+                <div class="metric-pill-title">Random Forest</div>
+                <div class="metric-pill-val" style="color: var(--cyan);">95.5%</div>
+              </div>
+              <div class="metric-pill-card">
+                <div class="metric-pill-title">Gradient Boost</div>
+                <div class="metric-pill-val" style="color: var(--violet);">96.0%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: 2050 FORECAST SIMULATOR -->
+    <section class="tab-section" id="section-forecast">
+      <div class="section-header">
+        <h3 class="section-title">Long-Term Climate Forecasting to 2050</h3>
+        <p class="section-subtitle">Linear regression trajectory projection alongside mitigation pathways and 95% confidence bounds.</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div class="chart-title-group">
+            <h3><i data-lucide="trending-up" style="color: var(--coral);"></i> Global Warming Projection Scenarios (1950–2050)</h3>
+            <p>Comparing Business-as-Usual against the 1.5°C Paris Agreement limit and an aggressive Net-Zero pathway.</p>
+          </div>
+        </div>
+        <div class="chart-canvas-container" style="min-height: 400px;">
+          <canvas id="chart-forecast-2050"></canvas>
+        </div>
+      </div>
+
+      <div class="country-filter-bar" style="margin-top: 1.5rem; display: flex; gap: 1.5rem; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 250px;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.35rem;">
+            <span>Select Future Forecast Year:</span>
+            <span class="form-value-badge" id="forecast-slider-val">2035</span>
+          </div>
+          <input type="range" class="range-slider" id="forecast-year-slider" min="2024" max="2050" value="2035">
+        </div>
+        <div style="min-width: 260px;">
+          <label for="forecast-scenario-select" style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.35rem;">Mitigation Policy Pathway:</label>
+          <select id="forecast-scenario-select" class="select-control" style="width: 100%; cursor: pointer;">
+            <option value="business_as_usual">Business as Usual (No Mitigation)</option>
+            <option value="paris_agreement">Paris Agreement 1.5°C Pathway</option>
+            <option value="net_zero">Global Net-Zero 2050 Trajectory</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="country-meta-card">
+        <div class="meta-item">
+          <div class="meta-label">Projected Global Anomaly</div>
+          <div class="meta-value" id="forecast-val-temp" style="color: var(--coral);">+3.29°C</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">95% Confidence Interval</div>
+          <div class="meta-value" id="forecast-val-ci" style="font-size: 1.15rem; color: var(--text-muted);">[+2.77°C, +3.81°C]</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Estimated Sea Level Impact</div>
+          <div class="meta-value" id="forecast-val-slr" style="color: var(--cyan);">+268 mm</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Paris Agreement Status</div>
+          <div class="meta-value" style="color: var(--coral); font-size: 1.15rem;">Breached (+1.79°C over target)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: DATA EXPLORER & CSV EXPORT -->
+    <section class="tab-section" id="section-table">
+      <div class="section-header">
+        <h3 class="section-title">Cleaned Climate Dataset Explorer</h3>
+        <p class="section-subtitle">Search, filter, and inspect all 2,220 historical observations across 30 nations (1950–2023).</p>
+      </div>
+
+      <div class="table-controls-bar">
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <input type="text" id="table-search" class="search-input" placeholder="Search by Country or Year...">
+          <select id="table-risk-filter" class="select-control" style="min-width: 160px;">
+            <option value="all">All Risk Levels</option>
+            <option value="high">High Risk Only</option>
+            <option value="normal">Normal Only</option>
+          </select>
+        </div>
+
+        <button class="btn-primary" id="btn-export-csv">
+          <i data-lucide="download"></i> Export Filtered CSV
+        </button>
+      </div>
+
+      <div class="data-table-container">
+        <table class="climate-table">
+          <thead>
+            <tr>
+              <th>Country</th>
+              <th>Year</th>
+              <th>Avg Temp</th>
+              <th>Anomaly</th>
+              <th>CO2 Emissions (MT)</th>
+              <th>CO2 / Capita</th>
+              <th>Sea Level Rise</th>
+              <th>Risk Classification</th>
+            </tr>
+          </thead>
+          <tbody id="climate-table-body">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination-wrapper">
+        <span id="table-info">Showing 1 to 15 of 2,220 records</span>
+        <div class="page-btn-group" id="pagination-buttons">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- App Footer -->
+  <footer class="app-footer">
+    <div style="max-width: 1440px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap: 1rem;">
+      <p>© 2026 TerraPulse AI • Climate Science & Machine Learning Research</p>
+      <p>Data Synthesized across 30 Countries (1950–2023) • Median Imputation • Scikit-Learn Benchmark</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/climate_data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

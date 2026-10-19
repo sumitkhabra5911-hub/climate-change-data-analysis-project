@@ -1,0 +1,49 @@
+{
+  "version": "1.0.0",
+  "training_records": 2220,
+  "features": [
+    "Year",
+    "CO2_Emissions_MT",
+    "CO2_per_Capita",
+    "Cumulative_CO2_MT",
+    "Sea_Level_Rise_mm",
+    "Precipitation_mm",
+    "Humidity_pct",
+    "Population",
+    "Country_Baseline_Temp",
+    "Temp_Change_YoY"
+  ],
+  "target": "High_Climate_Risk",
+  "metrics": [
+    {
+      "Model": "Logistic Regression",
+      "CV_Accuracy_Mean": 0.9454,
+      "CV_Accuracy_Std": 0.0153,
+      "Test_Accuracy": 0.9595,
+      "Test_Precision": 0.9346,
+      "Test_Recall": 0.9009,
+      "Test_F1_Score": 0.9174,
+      "Test_ROC_AUC": 0.9913
+    },
+    {
+      "Model": "Random Forest",
+      "CV_Accuracy_Mean": 0.9442,
+      "CV_Accuracy_Std": 0.0122,
+      "Test_Accuracy": 0.955,
+      "Test_Precision": 0.9252,
+      "Test_Recall": 0.8919,
+      "Test_F1_Score": 0.9083,
+      "Test_ROC_AUC": 0.9895
+    },
+    {
+      "Model": "Gradient Boosting",
+      "CV_Accuracy_Mean": 0.9397,
+      "CV_Accuracy_Std": 0.0127,
+      "Test_Accuracy": 0.9595,
+      "Test_Precision": 0.9346,
+      "Test_Recall": 0.9009,
+      "Test_F1_Score": 0.9174,
+      "Test_ROC_AUC": 0.9894
+    }
+  ]
+}
